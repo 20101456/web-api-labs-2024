@@ -2,10 +2,13 @@ import dotenv from 'dotenv';
 import express from 'express';
 import tasksRouter from './api/tasks';
 import './db';
+import usersRouter from './api/users';
+import cors from 'cors';
+
 
 dotenv.config();
 
-const errHandler = (err, req, res, next) => {
+const errHandler = (err, req, res) => {
   /* if the error in development then send stack trace to display whole error,
   if it's in production then just send error message  */
   if(process.env.NODE_ENV === 'production') {
@@ -19,11 +22,17 @@ const app = express();
 
 const port = process.env.PORT;
 
+// Enable CORS for all requests
+app.use(cors());
+
+
 app.use(express.json());
 
 app.use('/api/tasks', tasksRouter);
 
 app.use(errHandler);
+
+app.use('/api/users', usersRouter);
 
 app.listen(port, () => {
   console.info(`Server running at ${port}`);
