@@ -6,9 +6,9 @@ export default [
   {
     files: ["**/*.js"],
     languageOptions: {
-      globals: globals.node,
-      ecmaVersion: 2015, // ES6
+      ecmaVersion: 2018, 
       sourceType: "module", // Use module format
+      globals: globals.node,
     },
     rules: {
       "semi": 1,
